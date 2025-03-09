@@ -2,16 +2,11 @@ package web
 
 templ HelloForm() {
 	@Base() {
-		<form hx-post="/hello" method="POST" hx-target="#hello-container">
-			<input class="bg-gray-200 text-black p-2 border border-gray-400 rounded-lg"id="name" name="name" type="text"/>
-			<button type="submit" class="bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded">Submit</button>
-		</form>
-		<div id="hello-container"></div>
+		<div id="container">
+			<video id="gum-local" autoplay playsinline></video>
+			<button onclick="init()" class="bg-red-400 text-white px-4 py-2 mt-2">Open Camera</button>
+			<div id="errorMsg" style="color: red; margin-top: 10px;"></div>
+			<p class="warning"><strong>Warning:</strong> If you are not using headphones, playing audio may cause feedback.</p>
+		</div>
 	}
-}
-
-templ HelloPost(name string) {
-	<div class="bg-green-100 p-4 shadow-md rounded-lg mt-6">
-		<p>Hello, { name }</p>
-	</div>
 }

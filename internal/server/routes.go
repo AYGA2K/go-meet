@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"GoMeet/cmd/web"
+
 	"github.com/a-h/templ"
 	"github.com/coder/websocket"
 )
@@ -17,7 +18,6 @@ func (s *Server) RegisterRoutes() http.Handler {
 	mux := http.NewServeMux()
 
 	// Register routes
-	mux.HandleFunc("/", s.HelloWorldHandler)
 
 	mux.HandleFunc("/health", s.healthHandler)
 
@@ -25,9 +25,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 	fileServer := http.FileServer(http.FS(web.Files))
 	mux.Handle("/assets/", fileServer)
-	mux.Handle("/web", templ.Handler(web.HelloForm()))
-	mux.HandleFunc("/hello", web.HelloWebHandler)
-
+	mux.Handle("/", templ.Handler(web.HelloForm()))
 	// Wrap the mux with CORS middleware
 	return s.corsMiddleware(mux)
 }
